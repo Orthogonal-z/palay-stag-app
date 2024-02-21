@@ -1,42 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import StackNavigator from './Navigation/StackNavigator';
 import { PaperProvider } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
+import Splash from './Pages/Splash';
 
 
 export default function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const user_id = await AsyncStorage.getItem('user_id');
-        const user_token = await AsyncStorage.getItem('user_token');
-        const user_isAdmin = await AsyncStorage.getItem('user_isAdmin');
-
-        console.log('APP PAGE--------', user_id, user_token, user_isAdmin);
-
-        if (!user_token) {
-          setIsLoggedIn(false);
-        }
-
-        setIsLoggedIn(true);
-
-      } catch (error) {
-        console.error('Error AsyncStorage data - Homepage:', error);
-      }
-    };
-    fetchData();
+    // Simulate an asynchronous operation like data loading, authentication, etc.
+    // Once the operation is done, set isLoading to false to hide the splash screen.
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // Simulating a 3-second loading time, replace with your actual loading logic
   }, []);
-
 
 
   return (
     <PaperProvider>
       <StatusBar backgroundColor='orangered' />
-      <StackNavigator />
+      {isLoading ? <Splash /> : <StackNavigator />}
     </PaperProvider>
   );
 }

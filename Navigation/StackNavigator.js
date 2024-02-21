@@ -15,7 +15,7 @@ import LoginPage from '../Pages/LoginPage'
 import SignUpPage from '../Pages/SignUpPage'
 import PhoneOtpForm from '../Components/OTP/otpLogin'
 import React, { useEffect, useState } from 'react';
-import { SplashScreen } from 'expo';
+import * as SplashScreen from 'expo-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const StackNavigator = () => {
@@ -33,15 +33,15 @@ const StackNavigator = () => {
                 setIsAuthenticated(true);
             }
             setIsLoading(false);
-            SplashScreen.hide(); 
+            SplashScreen.hideAsync();
         }
 
-        SplashScreen.preventAutoHide(); 
+        SplashScreen.preventAutoHideAsync();
         checkAuthentication();
     }, []);
 
     if (isLoading) {
-        return null; 
+        return null;
     }
 
     function BottomTabs() {
