@@ -46,7 +46,7 @@ const StackNavigator = () => {
 
     function BottomTabs() {
         return (
-            <Tab.Navigator screenOptions={{ showLabel: false }}>
+            <Tab.Navigator screenOptions={{ showLabel: false }} >
                 <Tab.Screen
                     name='home'
                     component={HomePage}

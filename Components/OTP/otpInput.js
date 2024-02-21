@@ -8,7 +8,7 @@ const OtpInput = ({ length = 4, onOtpSubmit }) => {
     useEffect(() => {
         inputRefs.current[0]?.focus();
 
-        Keyboard.dismiss();
+        // Keyboard.dismiss();
         setTimeout(() => {
             inputRefs.current[0]?.focus();
         }, 100);

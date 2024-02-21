@@ -49,7 +49,6 @@ const PhoneOtpForm = ({ route }) => {
                 // await AsyncStorage.setItem('user_token', response.token);
                 // await AsyncStorage.setItem('user_isAdmin', JSON.stringify(response.data.isAdmin));
 
-
                 setTimeout(() => {
                     navigation.navigate('Main')
                 }, 500)

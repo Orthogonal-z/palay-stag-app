@@ -69,7 +69,7 @@ const SignUpPage = () => {
             "password": password
         };
 
-        console.log(data);
+        // console.log(data);
 
         await AuthAPIs.registerUser(data).then((response) => {
             if (response.status) {
@@ -84,6 +84,8 @@ const SignUpPage = () => {
 
             } else {
                 showSnackbar(response.message, 'red');
+                setIsLoading(false);
+
             }
         });
 
@@ -124,6 +126,7 @@ const SignUpPage = () => {
 
                         <View style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
                             <TextInput
+                                keyboardType="numeric"
                                 placeholder='Enter Phone Number'
                                 style={{
                                     fontSize: 17,
