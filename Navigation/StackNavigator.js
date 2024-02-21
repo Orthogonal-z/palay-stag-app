@@ -1,10 +1,8 @@
 import { StyleSheet } from 'react-native'
-import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Entypo } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 import HomePage from '../Pages/HomePage'
 import Bookings from '../Pages/Bookings'
 import Help from '../Pages/Help'
@@ -16,11 +14,35 @@ import Search from '../Components/Search'
 import LoginPage from '../Pages/LoginPage'
 import SignUpPage from '../Pages/SignUpPage'
 import PhoneOtpForm from '../Components/OTP/otpLogin'
+import React, { useEffect, useState } from 'react';
+import { SplashScreen } from 'expo';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const StackNavigator = () => {
 
     const Stack = createNativeStackNavigator()
     const Tab = createBottomTabNavigator()
+
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        async function checkAuthentication() {
+            const userToken = await AsyncStorage.getItem('user_token');
+            if (userToken) {
+                setIsAuthenticated(true);
+            }
+            setIsLoading(false);
+            SplashScreen.hide(); 
+        }
+
+        SplashScreen.preventAutoHide(); 
+        checkAuthentication();
+    }, []);
+
+    if (isLoading) {
+        return null; 
+    }
 
     function BottomTabs() {
         return (
@@ -87,7 +109,7 @@ const StackNavigator = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='otp'>
+            <Stack.Navigator initialRouteName={isAuthenticated ? 'Main' : 'login'}>
                 <Stack.Screen name='Main' component={BottomTabs} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='searchpage' component={Search} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='login' component={LoginPage} options={{ headerShown: false, animation: 'none' }} />

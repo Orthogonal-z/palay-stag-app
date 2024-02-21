@@ -5,20 +5,55 @@ import { COLORS } from '../Constants/COLORS';
 import { SIZE } from '../Constants/Size';
 import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import useSnackbar from '../Hooks/useSnackBar';
+import { AuthAPIs } from '../ClientAPIs/AuthenticationApis';
 
 const LoginPage = () => {
 
     const insets = useSafeAreaInsets();
+
+    const { showSnackbar, SnackbarComponent } = useSnackbar();
 
     const navigation = useNavigation()
 
     const [isLoading, setIsLoading] = useState(false);
     const [userPhoneNumber, setUserPhoneNumber] = useState('');
 
-    
+    const handleAllChange = (setterFunction) => (text) => {
 
+        if (text.length > 9) {
+            setterFunction(text);
+        }
+    };
 
+    const handleNavigatingToOtpPage = async () => {
+        setIsLoading(true);
+        if (userPhoneNumber.length >= 10) {
 
+            const data = {
+                'phone': userPhoneNumber
+            }
+
+            await AuthAPIs.loginUser(data).then((response) => {
+                if (response.status) {
+                    showSnackbar(response.message, 'green');
+                    setIsLoading(false);
+                    setTimeout(() => {
+                        navigation.navigate('otp', {
+                            phoneNumber: userPhoneNumber,
+                        })
+                    }, 500)
+                    setIsLoading(false);
+                } else {
+                    showSnackbar(response.message, 'red');
+                    setIsLoading(false);
+                }
+            })
+
+        } else {
+            setIsLoading(false);
+        }
+    }
 
     return (
         <SafeAreaProvider style={{ paddingTop: insets.top, paddingBottom: insets.bottom, backgroundColor: 'white' }}>
@@ -31,16 +66,15 @@ const LoginPage = () => {
                     <View style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 10 }}>
                         <TextInput
                             placeholder='Enter Phone Number'
-                            style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: '#EFEFEF', paddingHorizontal: 12, paddingVertical: 20 }} />
-
-
+                    keyboardType="numeric"
+                            style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: '#EFEFEF', paddingHorizontal: 12, paddingVertical: 20, fontSize: 18, fontWeight: '400' }}
+                            onChangeText={handleAllChange(setUserPhoneNumber)}
+                        />
                     </View>
                 </KeyboardAvoidingView>
 
                 <KeyboardAvoidingView style={{ marginTop: 20 }}>
-                    <Button onPress={() => navigation.navigate('otp', {
-                        phoneNumber: { userPhoneNumber },
-                    })} loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={() => setIsLoading(!isLoading)}>Send OTP</Button>
+                    <Button disabled={userPhoneNumber.length >= 10 ? false : true} onPress={() => handleNavigatingToOtpPage()} loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained">Send OTP</Button>
                 </KeyboardAvoidingView>
 
                 <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 14 }}>
@@ -53,6 +87,9 @@ const LoginPage = () => {
                 <View>
                     <Text style={{ alignSelf: 'center', top: 280 }}>Made with ❤️ in Dehradun</Text>
                 </View>
+
+                <SnackbarComponent />
+
             </View>
 
 

@@ -1,0 +1,1 @@
+export const baseURL = 'http://34.125.237.179:8002/api/auth/'

@@ -43,7 +43,7 @@ const OtpInput = ({ length = 4, onOtpSubmit }) => {
                 <TextInput
                     key={index}
                     ref={(ref) => (inputRefs.current[index] = ref)}
-                    style={styles.input}
+                    style={styles.input}                    
                     keyboardType="numeric"
                     maxLength={1}
                     value={value}

@@ -10,12 +10,27 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import DiscountDisplay from '../Components/DiscountDisplay';
 import { useNavigation } from '@react-navigation/native';
 import { SIZE } from '../Constants/Size';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomePage = ({ route }) => {
 
     useEffect(() => {
         const SearchQuery = route?.params?.valueToSet ?? ""
-        console.log(SearchQuery);
+        console.log(SearchQuery)
+        const fetchData = async () => {
+            try {
+                const user_id = await AsyncStorage.getItem('user_id');
+                const user_token = await AsyncStorage.getItem('user_token');
+                const user_isAdmin = await AsyncStorage.getItem('user_isAdmin');
+
+                console.log('HomePage--------', user_id, user_token, user_isAdmin);
+            } catch (error) {
+                console.error('Error AsyncStorage data - Homepage:', error);
+            }
+        };
+
+        fetchData();
+
     }, []);
 
     const insets = useSafeAreaInsets();

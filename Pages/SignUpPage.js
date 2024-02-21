@@ -6,6 +6,8 @@ import { SIZE } from '../Constants/Size';
 import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+import { AuthAPIs } from '../ClientAPIs/AuthenticationApis';
+import useSnackbar from '../Hooks/useSnackBar';
 
 
 const SignUpPage = () => {
@@ -13,6 +15,8 @@ const SignUpPage = () => {
     const insets = useSafeAreaInsets();
 
     const navigation = useNavigation()
+
+    const { showSnackbar, SnackbarComponent } = useSnackbar();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -25,36 +29,133 @@ const SignUpPage = () => {
         setIconName(prevIconName => (prevIconName === 'eye' ? 'eye-off' : 'eye'));
     };
 
+    const [name, setName] = useState('');
+    const [userPhoneNumber, setUserPhoneNumber] = useState('');
+    const [password, setPassword] = useState('');
+    const [refCoupon, setRefCoupon] = useState('');
+
+    const [nameBorderColor, setNameBorderColor] = useState('#EFEFEF');
+    const [phoneBorderColor, setPhoneBorderColor] = useState('#EFEFEF');
+    const [passwordBorderColor, setPasswordBorderColor] = useState('#EFEFEF');
+
+    const handleUserSignUp = async () => {
+        setNameBorderColor('#EFEFEF');
+        setPhoneBorderColor('#EFEFEF');
+        setPasswordBorderColor('#EFEFEF');
+
+        let isValid = true;
+
+        if (name.trim() === '') {
+            setNameBorderColor('red');
+            isValid = false;
+        }
+
+        if (userPhoneNumber.trim() === '') {
+            setPhoneBorderColor('red');
+            isValid = false;
+        }
+
+        if (password.trim() === '' || password.length < 8) {
+            setPasswordBorderColor('red');
+            isValid = false;
+        }
+
+        setIsLoading(true);
+
+        const data = {
+            "fullName": name,
+            "phone": userPhoneNumber,
+            "usedRefer": refCoupon,
+            "password": password
+        };
+
+        console.log(data);
+
+        await AuthAPIs.registerUser(data).then((response) => {
+            if (response.status) {
+                setIsLoading(false);
+                showSnackbar(response.message, 'green');
+
+                setTimeout(() => {
+                    navigation.navigate('otp', {
+                        phoneNumber: userPhoneNumber
+                    })
+                }, 500)
+
+            } else {
+                showSnackbar(response.message, 'red');
+            }
+        });
+
+    };
+
+
+
 
     return (
         <SafeAreaProvider style={{ paddingTop: insets.top, paddingBottom: insets.bottom, backgroundColor: 'white' }}>
             <KeyboardAvoidingView behavior='height'>
                 <View style={{ backgroundColor: 'white', paddingLeft: 18, paddingRight: 18, marginTop: 4 }}>
                     <View>
+                        <SnackbarComponent />
+                    </View>
+                    <View>
                         <Image style={{ height: 120, width: 130, alignSelf: 'center', marginTop: 16, resizeMode: 'contain' }} source={require('../assets/logo.png')} />
                     </View>
 
                     <View>
                         <View style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                            <Text style={{ fontWeight: 500, fontSize: SIZE.text__size }}>Enter Your Name</Text>
                             <TextInput
-                                placeholder='Your Name'
-                                style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: '#EFEFEF', paddingHorizontal: 12, paddingVertical: 20 }} />
+                                placeholder='Enter Your Name'
+                                style={{
+                                    fontSize: 17,
+                                    fontWeight: '400',
+                                    borderRadius: SIZE.borderRadius,
+                                    paddingVertical: 12,
+                                    backgroundColor: '#EFEFEF',
+                                    paddingHorizontal: 12,
+                                    borderColor: nameBorderColor,
+                                    borderWidth: 1,
+                                    paddingVertical: 20
+                                }}
+                                onChangeText={setName}
+                            />
                         </View>
 
                         <View style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                            <Text style={{ fontWeight: 500, fontSize: SIZE.text__size }}>Enter Your Phone Number</Text>
                             <TextInput
                                 placeholder='Enter Phone Number'
-                                style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: '#EFEFEF', paddingHorizontal: 12, paddingVertical: 20 }} />
+                                style={{
+                                    fontSize: 17,
+                                    fontWeight: '400',
+                                    borderRadius: SIZE.borderRadius,
+                                    paddingVertical: 12,
+                                    backgroundColor: '#EFEFEF',
+                                    paddingHorizontal: 12,
+                                    borderColor: phoneBorderColor,
+                                    borderWidth: 1,
+                                    paddingVertical: 20
+                                }}
+                                onChangeText={setUserPhoneNumber}
+                            />
                         </View>
 
                         <View style={{ marginTop: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                            <Text style={{ fontWeight: 500, fontSize: SIZE.text__size }}>Enter Your Password</Text>
-                            <View style={{ borderRadius: SIZE.borderRadius, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#EFEFEF', paddingHorizontal: 12, paddingVertical: 12 }}>
+                            <View style={{
+                                borderRadius: SIZE.borderRadius,
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                backgroundColor: '#EFEFEF',
+                                paddingHorizontal: 12,
+                                paddingVertical: 12,
+                                borderColor: passwordBorderColor,
+                                borderWidth: 1
+                            }}>
                                 <TextInput
                                     placeholder="Enter Password"
                                     secureTextEntry={!passwordVisible}
+                                    style={{ flex: 1 }}
+                                    onChangeText={setPassword}
                                 />
                                 <Pressable onPress={togglePasswordVisibility} style={{ padding: 10 }}>
                                     <Feather name={iconName} size={24} color="black" />
@@ -75,7 +176,7 @@ const SignUpPage = () => {
                     </View>
 
                     <View style={{ marginTop: 20 }}>
-                        <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={() => setIsLoading(!isLoading)}>Send OTP</Button>
+                        <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={() => handleUserSignUp()}>Send OTP</Button>
                     </View>
 
                     <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 14 }}>
