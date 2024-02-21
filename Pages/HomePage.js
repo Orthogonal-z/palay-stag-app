@@ -6,12 +6,10 @@ import UserLocation from '../Components/UserLocation';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../Constants/COLORS';
 import { FontAwesome } from '@expo/vector-icons';
-
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import DiscountDisplay from '../Components/DiscountDisplay';
 import { useNavigation } from '@react-navigation/native';
 import { SIZE } from '../Constants/Size';
-
 
 const HomePage = ({ route }) => {
 

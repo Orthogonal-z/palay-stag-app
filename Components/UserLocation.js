@@ -48,12 +48,10 @@ const UserLocation = () => {
         text = locationName;
     }
 
-    
-
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <FontAwesome6 name="location-arrow" size={24} color={COLORS.text__color} />
-            <Text>{text}</Text>
+            <Text>{text ? text : 'Failed to fetch'}</Text>
         </View>
     );
 };

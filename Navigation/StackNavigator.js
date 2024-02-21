@@ -13,6 +13,9 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import Search from '../Components/Search'
+import LoginPage from '../Pages/LoginPage'
+import SignUpPage from '../Pages/SignUpPage'
+import PhoneOtpForm from '../Components/OTP/otpLogin'
 
 const StackNavigator = () => {
 
@@ -84,9 +87,12 @@ const StackNavigator = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='Main'>
+            <Stack.Navigator initialRouteName='otp'>
                 <Stack.Screen name='Main' component={BottomTabs} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='searchpage' component={Search} options={{ headerShown: false, animation: 'none' }} />
+                <Stack.Screen name='login' component={LoginPage} options={{ headerShown: false, animation: 'none' }} />
+                <Stack.Screen name='signup' component={SignUpPage} options={{ headerShown: false, animation: 'none' }} />
+                <Stack.Screen name='otp' component={PhoneOtpForm} options={{ headerShown: false, animation: 'none' }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
