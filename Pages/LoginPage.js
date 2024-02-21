@@ -13,6 +13,11 @@ const LoginPage = () => {
     const navigation = useNavigation()
 
     const [isLoading, setIsLoading] = useState(false);
+    const [userPhoneNumber, setUserPhoneNumber] = useState('');
+
+    
+
+
 
 
     return (
@@ -22,10 +27,8 @@ const LoginPage = () => {
                     <Image style={{ height: 120, width: 130, alignSelf: 'center', marginTop: 16, resizeMode: 'contain' }} source={require('../assets/logo.png')} />
                 </View>
 
-
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                     <View style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                        <Text style={{ fontWeight: 500, fontSize: SIZE.text__size }}>Enter Your Phone Number</Text>
                         <TextInput
                             placeholder='Enter Phone Number'
                             style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: '#EFEFEF', paddingHorizontal: 12, paddingVertical: 20 }} />
@@ -35,7 +38,9 @@ const LoginPage = () => {
                 </KeyboardAvoidingView>
 
                 <KeyboardAvoidingView style={{ marginTop: 20 }}>
-                    <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={() => setIsLoading(!isLoading)}>Send OTP</Button>
+                    <Button onPress={() => navigation.navigate('otp', {
+                        phoneNumber: { userPhoneNumber },
+                    })} loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={() => setIsLoading(!isLoading)}>Send OTP</Button>
                 </KeyboardAvoidingView>
 
                 <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 14 }}>
