@@ -14,14 +14,16 @@ export default function App() {
     // Once the operation is done, set isLoading to false to hide the splash screen.
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000); // Simulating a 3-second loading time, replace with your actual loading logic
+    }, 2000);
   }, []);
 
 
   return (
     <PaperProvider>
       <StatusBar backgroundColor='orangered' />
-      {isLoading ? <Splash /> : <StackNavigator />}
+      {
+        isLoading ? <Splash /> : <StackNavigator />
+      }
     </PaperProvider>
   );
 }

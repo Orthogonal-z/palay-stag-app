@@ -109,7 +109,7 @@ const StackNavigator = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={isAuthenticated ? 'Main' : 'login'}>
+            <Stack.Navigator initialRouteName={isAuthenticated ? 'bookings' : 'login'}>
                 <Stack.Screen name='Main' component={BottomTabs} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='searchpage' component={Search} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='login' component={LoginPage} options={{ headerShown: false, animation: 'none' }} />

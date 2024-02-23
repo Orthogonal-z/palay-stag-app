@@ -4,5 +4,6 @@ export const COLORS = {
     btn__color: 'orangered',
     tab__color: '#008E97',
     searchIcon__color: '#4A4A4A',
-    small__btn: '#FFE3D0'
+    small__btn: '#FFE3D0',
+    bookings__text: '#453F38'
 }

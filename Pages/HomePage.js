@@ -23,7 +23,6 @@ const HomePage = ({ route }) => {
                 const user_token = await AsyncStorage.getItem('user_token');
                 const user_isAdmin = await AsyncStorage.getItem('user_isAdmin');
 
-                console.log('HomePage--------', user_id, user_token, user_isAdmin);
             } catch (error) {
                 console.error('Error AsyncStorage data - Homepage:', error);
             }
@@ -52,7 +51,6 @@ const HomePage = ({ route }) => {
         const selectedDateObject = new Date(date);
         const formattedDate = selectedDateObject.toISOString().split('T')[0];
         setSelectedDate(formattedDate);
-        console.log(formattedDate)
         hideDatePicker();
     };
 
@@ -100,11 +98,12 @@ const HomePage = ({ route }) => {
                             </View>
                             <View>
                                 <Pressable style={{ backgroundColor: COLORS.small__btn, width: 150, borderWidth: 0, borderRadius: SIZE.borderRadius }} mode="contained" onPress={showDatePicker}>
-                                    <Text style={{ paddingVertical: 16, textAlign: 'center' }}>
+                                    <Text style={{ paddingVertical: 16, textAlign: 'center', fontWeight: '700' }}>
                                         {selectedDate ? formatDate(selectedDate) : 'Select'}
                                     </Text>
                                 </Pressable>
                             </View>
+
                         </View>
                     </View>
 
