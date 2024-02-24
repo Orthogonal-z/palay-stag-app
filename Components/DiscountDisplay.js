@@ -21,7 +21,7 @@ const DiscountDisplay = () => {
                 </View>
             </View>
 
-            <HomeCarousal />
+            {/* <HomeCarousal /> */}
 
         </View>
     );

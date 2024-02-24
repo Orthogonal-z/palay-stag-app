@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AuthAPIs } from '../ClientAPIs/AuthenticationApis';
 import useSnackbar from '../Hooks/useSnackBar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const SignUpPage = () => {
@@ -75,7 +76,7 @@ const SignUpPage = () => {
             if (response.status) {
                 setIsLoading(false);
                 showSnackbar(response.message, 'green');
-
+                AsyncStorage.setItem('user__name', name);
                 setTimeout(() => {
                     navigation.navigate('otp', {
                         phoneNumber: userPhoneNumber
@@ -85,7 +86,6 @@ const SignUpPage = () => {
             } else {
                 showSnackbar(response.message, 'red');
                 setIsLoading(false);
-
             }
         });
 

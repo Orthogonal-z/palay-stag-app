@@ -66,7 +66,7 @@ const LoginPage = () => {
                     <View style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 10 }}>
                         <TextInput
                             placeholder='Enter Phone Number'
-                    keyboardType="numeric"
+                            keyboardType="numeric"
                             style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: '#EFEFEF', paddingHorizontal: 12, paddingVertical: 20, fontSize: 18, fontWeight: '400' }}
                             onChangeText={handleAllChange(setUserPhoneNumber)}
                         />

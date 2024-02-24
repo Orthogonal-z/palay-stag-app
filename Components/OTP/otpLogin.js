@@ -16,6 +16,7 @@ const PhoneOtpForm = ({ route }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState('');
 
+
     const { showSnackbar, SnackbarComponent } = useSnackbar();
 
     useEffect(() => {
@@ -41,7 +42,10 @@ const PhoneOtpForm = ({ route }) => {
                 showSnackbar(response.message, 'green');
                 setIsLoading(false);
 
+                console.log(response);
+
                 await AsyncStorage.setItem('user_id', response.data._id);
+                await AsyncStorage.setItem('user_name', response.data._id);
                 await AsyncStorage.setItem('user_token', response.token);
                 await AsyncStorage.setItem('user_isAdmin', JSON.stringify(response.data.isAdmin));
 

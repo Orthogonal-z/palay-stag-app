@@ -8,10 +8,12 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SIZE } from '../Constants/Size';
 import { COLORS } from '../Constants/COLORS';
+import DiscountDisplay from '../Components/DiscountDisplay';
+import PickupDropModal from '../Components/PickupDropModal';
 
 // Lazy-loaded components
 const UserLocation = lazy(() => import('../Components/UserLocation'));
-const DiscountDisplay = lazy(() => import('../Components/DiscountDisplay'));
+// const DiscountDisplay = lazy(() => import('../Components/DiscountDisplay'));
 
 const HomePage = ({ route }) => {
     useEffect(() => {
@@ -59,6 +61,12 @@ const HomePage = ({ route }) => {
         const date = new Date(dateString);
         return `${date.toLocaleString('en-IN', options)}`;
     };
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalVisible(!isModalVisible);
+    }
 
     return (
         <SafeAreaProvider style={{ paddingTop: insets.top, paddingBottom: insets.bottom, backgroundColor: 'white' }}>
@@ -109,15 +117,12 @@ const HomePage = ({ route }) => {
 
                     {/* Hit Search Button */}
                     <View style={{ marginTop: 28 }}>
-                        <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={() => setIsLoading(!isLoading)}>
+                        <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={handleOpenModal}>
                             Search
                         </Button>
                     </View>
 
-                    {/* Banners and Info */}
-                    <Suspense fallback={<Text>Loading banners...</Text>}>
-                        <DiscountDisplay />
-                    </Suspense>
+                    <DiscountDisplay />
 
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
@@ -128,12 +133,13 @@ const HomePage = ({ route }) => {
                     />
                 </View>
 
-                <View style={{ paddingLeft: 18, paddingRight: 18, marginTop: 18, marginBottom: 18 }}>
-                    <Text style={{ fontSize: 38, fontWeight: 900, color: '#ADADAD' }}>Made With</Text>
-                    <Text style={{ fontSize: 40, fontWeight: 900, color: '#ADADAD' }}>Love ❤️</Text>
-                    <Text style={{ fontSize: 42, fontWeight: 900, color: '#ADADAD' }}>in <Text style={{ fontSize: 42, fontWeight: 900, color: COLORS.btn__color }}>Dehradun</Text></Text>
+                <View>
+                    <Text style={{ alignSelf: 'center', top: 70 }}>Made with ❤️ in Dehradun</Text>
                 </View>
             </ScrollView>
+
+            {/* Modal */}
+            <PickupDropModal visible={isModalVisible} hideModal={() => setIsModalVisible(false)} />
         </SafeAreaProvider>
     )
 }
