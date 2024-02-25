@@ -19,6 +19,12 @@ const DiscountDisplay = () => {
                     <Text>twenty percent discount on your</Text>
                     <Text>first trip from Palay</Text>
                 </View>
+
+
+            </View>
+
+            <View>
+                <Text style={{ alignSelf: 'center', marginTop: 160 }}>Made with ❤️ in Dehradun</Text>
             </View>
 
             {/* <HomeCarousal /> */}

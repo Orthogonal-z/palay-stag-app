@@ -1,100 +1,66 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { View, TextInput, FlatList, Text, TouchableOpacity, Keyboard } from 'react-native';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import React, { useEffect, useState, useCallback } from 'react';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { GOOGLE_PLACES_API_KEY } from '../utils/PlacesAutomcomplete';
 
 const Search = ({ route }) => {
-    const insets = useSafeAreaInsets();
-    const [searchQuery, setSearchQuery] = useState('');
-    const [filteredItems, setFilteredItems] = useState([]);
-    const inputRef = useRef(null);
-
+    const [mainPageItem, setMainPageItem] = useState('');
     const navigation = useNavigation();
+    const insets = useSafeAreaInsets();
 
     useEffect(() => {
-        const { item } = route.params;
-        console.log(item);
+        const { item } = route?.params;
+        setMainPageItem(item);
+    }, [route]);
 
-        inputRef.current.focus();
-        Keyboard.addListener('keyboardDidShow', () => { });
-        Keyboard.addListener('keyboardDidHide', () => { });
-    }, []);
+    const handleSelect = useCallback(async (data, details) => {
+        const { lat, lng } = details.geometry.location;
+        const searchPickupQuery = data.description;
+        const storageKey = mainPageItem === 'fromPickup' ? 'pickValues' : 'goingValues';
+        const nameKey = mainPageItem === 'fromPickup' ? 'pickValuesName' : 'goingValuesName';
 
-    // Mock data
-    const items2 = [
-        { label: 'Munsiyari', value: 'Munsiyari' },
-        { label: 'Rudraprayag', value: 'Rudraprayag' },
-        { label: 'Joshimath', value: 'Joshimath' },
-        { label: 'Agastyamuni', value: 'Agastyamuni' },
-        { label: 'Chaukhamba', value: 'Chaukhamba' },
-        { label: 'Nainital', value: 'Nainital' },
-        { label: 'Sri Nagar', value: 'Nagar' }
-    ];
-
-    // Debounce function to delay search action
-    const debounce = (func, delay) => {
-        let timeoutId;
-        return function (...args) {
-            if (timeoutId) {
-                clearTimeout(timeoutId);
+        try {
+            if (mainPageItem === 'fromPickup') {
+                await AsyncStorage.setItem(storageKey, JSON.stringify({ pickLat: lat, pickLong: lng }));
+            } else {
+                await AsyncStorage.setItem(storageKey, JSON.stringify({ dropLat: lat, dropLong: lng }));
             }
-            timeoutId = setTimeout(() => {
-                func(...args);
-            }, delay);
-        };
-    };
-
-    // Handle text input change
-    const handleTextInputChange = (text) => {
-        setSearchQuery(text);
-        debouncedSearch(text);
-    };
-
-    // Debounced search function
-    const debouncedSearch = debounce((text) => {
-        const filtered = items2.filter(item =>
-            item.label.toLowerCase().includes(text.toLowerCase())
-        );
-        setFilteredItems(filtered);
-    }, 1000);
-
-    const handlePassValue = (valueToSet) => {
-        console.log(valueToSet, 'pickup value from Search')
-        navigation.navigate('Main', {
-            valueToSet
-        })
-    }
+            await AsyncStorage.setItem(nameKey, JSON.stringify({ searchPickupQuery }));
+            navigation.navigate('Main');
+        } catch (error) {
+            console.error('Error storing data:', error);
+        }
+    }, [mainPageItem, navigation]);
 
     return (
         <SafeAreaProvider style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-            <View style={{ paddingLeft: 18, paddingRight: 18, marginTop: 18 }}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Ionicons onPress={() => navigation.goBack()} name="arrow-back" size={24} color="black" />
-                </TouchableOpacity>
-                <View style={{ marginTop: 12 }}>
-                    <TextInput
-                        ref={inputRef}
-                        style={{ backgroundColor: 'white', borderWidth: 0, borderRadius: 3, paddingHorizontal: 20, paddingVertical: 18 }}
-                        placeholder="Search Pckup Location..."
-                        value={searchQuery}
-                        onChangeText={handleTextInputChange}
-                    />
-                    <FlatList
-                        style={{ marginTop: 4 }}
-                        data={filteredItems}
-                        renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => handlePassValue(item.value)}>
-                                <View style={{ marginTop: 6, backgroundColor: 'white', paddingHorizontal: 10, paddingTop: 6, paddingBottom: 8, paddingHorizontal: 20 }}>
-                                    <Text style={{ paddingVertical: 14, }}>{item.label}</Text>
-                                </View>
-                            </TouchableOpacity>
-                        )}
-                        keyExtractor={(item) => item.value}
+            <ScrollView keyboardShouldPersistTaps='always' style={{ flex: 0, paddingLeft: 18, paddingRight: 18, marginTop: 18 }}>
+                <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Ionicons onPress={() => navigation.goBack()} name="arrow-back" size={24} color="black" />
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 18, fontWeight: '600' }}>
+                        {mainPageItem === 'fromPickup' ? 'Select Pickup Location' : 'Where are you going ?'}
+                    </Text>
+                </View>
+                <View style={{ marginTop: 19 }}>
+                    <GooglePlacesAutocomplete
+                        listViewDisplayed={false}
+                        fetchDetails={true}
+                        placeholder='Search....'
+                        onPress={handleSelect}
+                        query={{
+                            key: GOOGLE_PLACES_API_KEY,
+                            language: 'en',
+                        }}
+                        onFail={error => console.error(error)}
                     />
                 </View>
-            </View>
+            </ScrollView>
         </SafeAreaProvider>
     );
 };

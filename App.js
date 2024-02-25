@@ -3,7 +3,6 @@ import StackNavigator from './Navigation/StackNavigator';
 import { PaperProvider } from 'react-native-paper';
 import { useEffect, useState } from 'react';
 import Splash from './Pages/Splash';
-import { AuthProvider } from './Context/AuthContext';
 
 
 export default function App() {
@@ -11,7 +10,6 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
