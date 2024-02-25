@@ -7,6 +7,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GOOGLE_PLACES_API_KEY } from '../utils/PlacesAutomcomplete';
 
+
 const Search = ({ route }) => {
     const [mainPageItem, setMainPageItem] = useState('');
     const navigation = useNavigation();
@@ -54,7 +55,7 @@ const Search = ({ route }) => {
                         placeholder='Search....'
                         onPress={handleSelect}
                         query={{
-                            key: GOOGLE_PLACES_API_KEY,
+                            key: process.env.EXPO_PUBLIC_GOOGLE_KEY,
                             language: 'en',
                         }}
                         onFail={error => console.error(error)}
