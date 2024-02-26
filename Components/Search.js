@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GOOGLE_PLACES_API_KEY } from '../utils/PlacesAutomcomplete';
 
 
 const Search = ({ route }) => {

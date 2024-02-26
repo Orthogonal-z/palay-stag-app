@@ -190,7 +190,7 @@ const SignUpPage = () => {
                     </View>
 
                     <View>
-                        <Text style={{ alignSelf: 'center', top: 70 }}>Made with ❤️ in Dehradun</Text>
+                        <Text style={{ alignSelf: 'center', top: 70 }}>Made with ❤️ in Dehradun, India</Text>
                     </View>
                 </View>
             </KeyboardAvoidingView>

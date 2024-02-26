@@ -1,1 +1,1 @@
-export const baseURL = process.env.EXPO_PUBLIC_BASE_URL
+export const baseURL = 'http://34.125.237.179:8002/api/auth/'

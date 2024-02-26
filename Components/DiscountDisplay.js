@@ -24,7 +24,7 @@ const DiscountDisplay = () => {
             </View>
 
             <View>
-                <Text style={{ alignSelf: 'center', marginTop: 160 }}>Made with ❤️ in Dehradun</Text>
+                <Text style={{ alignSelf: 'center', marginTop: 160 }}>Made with ❤️ in Dehradun, India</Text>
             </View>
 
             {/* <HomeCarousal /> */}

@@ -85,7 +85,7 @@ const LoginPage = () => {
                 </View>
 
                 <View>
-                    <Text style={{ alignSelf: 'center', top: 280 }}>Made with ❤️ in Dehradun</Text>
+                    <Text style={{ alignSelf: 'center', top: 280 }}>Made with ❤️ in Dehradun, India</Text>
                 </View>
 
                 <SnackbarComponent />

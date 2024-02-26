@@ -10,6 +10,7 @@ import DiscountDisplay from '../Components/DiscountDisplay';
 import PickupDropModal from '../Components/PickupDropModal';
 import MainInputs from '../Components/MainInputs';
 import { HomePageAPI } from '../ClientAPIs/HomePageAPI';
+import DatePicker from '../Components/DatePicker';
 
 const UserLocation = lazy(() => import('../Components/UserLocation'));
 // const DiscountDisplay = lazy(() => import('../Components/DiscountDisplay'));
@@ -46,12 +47,10 @@ const HomePage = ({ route }) => {
             const pick = JSON.parse(await AsyncStorage.getItem('pickValues'));
             const going = JSON.parse(await AsyncStorage.getItem('goingValues'));
 
-            // Extract latitude and longitude from pick and going objects
             const pickLat = pick.pickLat;
             const pickLong = pick.pickLong;
             const dropLat = going.dropLat;
             const dropLong = going.dropLong;
-
 
             const dataToSend = {
                 "pickup": {
@@ -67,10 +66,16 @@ const HomePage = ({ route }) => {
             console.log("Data to Send:", dataToSend);
 
             HomePageAPI.fetchAllVehicles(dataToSend).then((response) => {
-                if (response.status) {
-                    console.log('COOOOOOOL')
-                } else {
-                    console.log('NOT COOOOOOOL')
+                try {
+                    if (response.status) {
+                        console.log('COOOOOOOL')
+                        console.log(response)
+                    } else {
+                        console.log('NOT COOOOOOOL')
+                        console.log(response)
+                    }
+                } catch (error) {
+                    console.log(error)
                 }
             })
 
@@ -92,7 +97,11 @@ const HomePage = ({ route }) => {
                         <Text style={{ fontSize: 32, fontWeight: '500', marginTop: 10, marginBottom: 20 }}>PALAY</Text>
                     </View>
 
+                    {/* Inputs */}
                     <MainInputs />
+
+                    {/* DatePicker */}
+                    <DatePicker />
 
                     {/* Hit Search Button */}
                     <View style={{ marginTop: 28 }}>
