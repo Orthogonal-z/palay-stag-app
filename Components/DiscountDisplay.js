@@ -1,8 +1,6 @@
 import { View, Text, Image } from 'react-native';
 import React from 'react';
-import HomeCarousal from './HomeCarousal';
 import discountImage from '../assets/discount.png'
-import { COLORS } from '../Constants/COLORS';
 import { SIZE } from '../Constants/Size';
 
 
