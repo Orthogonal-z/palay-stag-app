@@ -1,14 +1,16 @@
-import { View, Text, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Pressable } from 'react-native';
+import React, { useState } from 'react';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { SIZE } from '../Constants/Size';
 import { FontAwesome } from '@expo/vector-icons';
 import { COLORS } from '../Constants/COLORS';
+import useSnackbar from '../Hooks/useSnackBar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DatePicker = () => {
-
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const { showSnackbar, SnackbarComponent } = useSnackbar();
 
     const formatDate = (dateString) => {
         const options = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -24,10 +26,19 @@ const DatePicker = () => {
         setDatePickerVisibility(false);
     };
 
-    const handleConfirm = (date) => {
+    const handleConfirm = async (date) => {
+        const currentDate = new Date();
         const selectedDateObject = new Date(date);
+
+        // if (selectedDateObject < currentDate || selectedDateObject > new Date(currentDate.setDate(currentDate.getDate() + 30))) {
+        //     showSnackbar('Please Select Correct Date', 'red');
+        // } else {
         const formattedDate = selectedDateObject.toISOString().split('T')[0];
         setSelectedDate(formattedDate);
+
+        await AsyncStorage.setItem('selectedDate', JSON.stringify(formattedDate));
+        // }
+
         hideDatePicker();
     };
 
@@ -56,8 +67,10 @@ const DatePicker = () => {
                 onCancel={hideDatePicker}
                 locale="en-IN"
             />
-        </View>
-    )
-}
 
-export default DatePicker
+            <SnackbarComponent />
+        </View>
+    );
+};
+
+export default DatePicker;

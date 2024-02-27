@@ -43,6 +43,9 @@ const HomePage = ({ route }) => {
     }
 
     const handleInputsSearch = async () => {
+
+        setIsLoading(true);
+
         try {
             const pick = JSON.parse(await AsyncStorage.getItem('pickValues'));
             const going = JSON.parse(await AsyncStorage.getItem('goingValues'));
@@ -73,6 +76,7 @@ const HomePage = ({ route }) => {
                     } else {
                         console.log('NOT COOOOOOOL')
                         console.log(response)
+                        setIsLoading(false);
                     }
                 } catch (error) {
                     console.log(error)
@@ -81,6 +85,8 @@ const HomePage = ({ route }) => {
 
         } catch (error) {
             console.error('Error handling input search:', error);
+            setIsLoading(false);
+
         }
     };
 

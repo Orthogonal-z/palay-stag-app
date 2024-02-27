@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import useSnackbar from '../Hooks/useSnackBar';
 
 const Search = ({ route }) => {
     const [mainPageItem, setMainPageItem] = useState('');
@@ -61,6 +61,8 @@ const Search = ({ route }) => {
                     />
                 </View>
             </ScrollView>
+
+
         </SafeAreaProvider>
     );
 };

@@ -18,7 +18,7 @@ const useSnackbar = () => {
         setVisible(false);
     };
 
-    const SnackbarComponent = () => (
+    const SnackbarComponent = ({ props }) => (
         <Snackbar
             visible={visible}
             onDismiss={hideSnackbar}
@@ -26,7 +26,7 @@ const useSnackbar = () => {
             duration={Snackbar.DURATION_SHORT}
             wrapperStyle={{ top: 0 }}
         >
-            <Text style={{ color: 'white' }}>{message}</Text>
+            <Text style={{ color: 'white', textAlign: 'center' }}>{message}</Text>
         </Snackbar>
     );
 

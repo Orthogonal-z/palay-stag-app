@@ -18,7 +18,6 @@ const MainInputs = ({ route }) => {
 
     // For Pickup Values
     const [pickVal, setPickVal] = useState('');
-
     const pickupValFromSearch = async () => {
         const pickName = await AsyncStorage?.getItem('pickValuesName');
         setPickVal(pickName);
@@ -26,15 +25,14 @@ const MainInputs = ({ route }) => {
 
     // For Dropping Values
     const [goingVal, setGoingVal] = useState('');
-
     const goingValFromSearch = async () => {
         const goName = await AsyncStorage?.getItem('goingValuesName');
         setGoingVal(goName);
     }
 
     const handleShowLimitedStrings = (text) => {
-        if (text.length > 25) {
-            return text.substring(0, 25) + '..';
+        if (text.length > 28) {
+            return text.substring(0, 28) + '...';
         } else {
             return text;
         }
@@ -51,7 +49,7 @@ const MainInputs = ({ route }) => {
                             style={{
                                 flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#EFEFEF',
                                 paddingHorizontal: 12, paddingVertical: 18, borderRadius: SIZE.borderRadius,
-                                justifyContent: 'space-between', borderBottomColor: 'gray', borderBottomWidth: 1
+                                justifyContent: 'space-between', borderBottomColor: COLORS.btn__color, borderBottomWidth: 1
                             }}>
                             <View style={{ flexDirection: 'row', gap: 10 }}>
                                 <Ionicons name="search-outline" size={24} color={COLORS.searchIcon__color} />
@@ -66,7 +64,7 @@ const MainInputs = ({ route }) => {
                                         </Text>
                                 }
                             </View>
-                            <Pressable style={{ position: 'absolute', marginLeft: 290 }} onPress={() => setPickVal('')}>
+                            <Pressable style={{ position: 'absolute', marginLeft: 310 }} onPress={() => setPickVal('')}>
                                 <Entypo name="cross" size={24} color="orangered" />
                             </Pressable>
                         </Pressable >
@@ -77,7 +75,7 @@ const MainInputs = ({ route }) => {
                             style={{
                                 flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#EFEFEF',
                                 paddingHorizontal: 12, paddingVertical: 18, borderRadius: SIZE.borderRadius,
-                                justifyContent: 'space-between', borderBottomColor: 'gray', borderBottomWidth: 1
+                                justifyContent: 'space-between', borderBottomColor: COLORS.btn__color, borderBottomWidth: 1
                             }}>
                             <View style={{ flexDirection: 'row', gap: 10 }}>
                                 <Ionicons name="search-outline" size={24} color={COLORS.searchIcon__color} />
@@ -92,7 +90,7 @@ const MainInputs = ({ route }) => {
                                         </Text>
                                 }
                             </View>
-                            <Pressable style={{ position: 'absolute', marginLeft: 290 }} onPress={() => setGoingVal('')}>
+                            <Pressable style={{ position: 'absolute', marginLeft: 310 }} onPress={() => setGoingVal('')}>
                                 <Entypo name="cross" size={24} color="orangered" />
                             </Pressable>
                         </Pressable>

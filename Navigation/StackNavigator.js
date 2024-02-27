@@ -17,6 +17,7 @@ import PhoneOtpForm from '../Components/OTP/otpLogin'
 import React, { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ShowCabs from '../Pages/ShowCabs';
 
 const StackNavigator = () => {
 
@@ -109,12 +110,13 @@ const StackNavigator = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={isAuthenticated ? 'bookings' : 'login'}>
+            <Stack.Navigator initialRouteName={isAuthenticated ? 'cabs' : 'login'}>
                 <Stack.Screen name='Main' component={BottomTabs} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='searchpage' component={Search} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='login' component={LoginPage} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='signup' component={SignUpPage} options={{ headerShown: false, animation: 'none' }} />
                 <Stack.Screen name='otp' component={PhoneOtpForm} options={{ headerShown: false, animation: 'none' }} />
+                <Stack.Screen name='cabs' component={ShowCabs} options={{ headerShown: false, animation: 'none' }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
