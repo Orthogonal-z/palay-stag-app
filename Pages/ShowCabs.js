@@ -37,48 +37,48 @@ export default function ShowCabs() {
 
     const dataToMap = [
         {
-            driverImg: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            driverImg: 'https://images.unsplash.com/photo-1626565244872-206f4c1f9e57?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             driverName: 'Umesh Mali',
             driverRatings: '4.2',
             driverCar: 'Swift Dzire',
-            pickupFrom: 'Jhilmil',
-            drop: 'Hardiwar',
+            pickupFrom: 'Jhilmil, Nangloi, India',
+            drop: 'Hardiwar, Nangloi, India',
             pickupTime: '01:30 PM',
             dropTime: '06:30 PM',
             vehicleNumber: 'DL MUUBETE',
             price: '₹ 500',
         },
         {
-            driverImg: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            driverImg: 'https://images.unsplash.com/photo-1626565244872-206f4c1f9e57?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             driverName: 'Praveen Mali',
             driverRatings: '4.2',
             driverCar: 'Swift Dzire',
-            pickupFrom: 'Jhilmil',
-            drop: 'Hardiwar',
+            pickupFrom: 'Jhilmil, Nangloi, India',
+            drop: 'Hardiwar, Nangloi, India',
             pickupTime: '01:30 PM',
             dropTime: '06:30 PM',
             vehicleNumber: 'DL MUUBETE',
             price: '₹ 500',
         },
         {
-            driverImg: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            driverImg: 'https://images.unsplash.com/photo-1626565244872-206f4c1f9e57?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             driverName: 'Prashant Mali',
             driverRatings: '4.2',
             driverCar: 'Swift Dzire',
-            pickupFrom: 'Jhilmil',
-            drop: 'Hardiwar',
+            pickupFrom: 'Jhilmil, Nangloi, India',
+            drop: 'Hardiwar, Nangloi, India',
             pickupTime: '01:30 PM',
             dropTime: '06:30 PM',
             vehicleNumber: 'DL MUUBETE',
             price: '₹ 500',
         },
         {
-            driverImg: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            driverImg: 'https://images.unsplash.com/photo-1626565244872-206f4c1f9e57?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             driverName: 'Rahul Mali',
             driverRatings: '4.2',
             driverCar: 'Swift Dzire',
-            pickupFrom: 'Jhilmil',
-            drop: 'Hardiwar',
+            pickupFrom: 'Jhilmil, Nangloi, India',
+            drop: 'Hardiwar, Nangloi, India',
             pickupTime: '01:30 PM',
             dropTime: '06:30 PM',
             vehicleNumber: 'DL MUUBETE',
@@ -99,7 +99,7 @@ export default function ShowCabs() {
                     <Text style={{ fontWeight: '700', fontSize: 16, color: COLORS.btn__color }}>Change Date</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: COLORS.small__btn, paddingHorizontal: 6, paddingVertical: 6, borderRadius: 4 }}>
                         <AntDesign name="filter" size={18} color="black" />
-                        <Text>filter</Text>
+                        <Text>Filter</Text>
                     </View>
                 </View>
             </View>
@@ -122,8 +122,8 @@ export default function ShowCabs() {
                     {
                         dataToMap && dataToMap?.map((items, index) => {
                             return (
-                                <View style={{ paddingHorizontal: 18, flexDirection: 'column', gap: 8 }} key={index}>
-                                    <CabsList data={items} style={{ flexDirection: 'column', gap: 16 }} />
+                                <View style={{ paddingHorizontal: 18, flexDirection: 'column',  marginBottom: 12 }} key={index}>
+                                    <CabsList data={items} style={{  marginBottom: 12}} />
                                 </View>
                             )
                         })

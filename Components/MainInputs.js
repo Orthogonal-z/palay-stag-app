@@ -5,6 +5,7 @@ import { useFocusEffect, useIsFocused, useNavigation } from '@react-navigation/n
 import { SIZE } from '../Constants/Size';
 import { COLORS } from '../Constants/COLORS';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { handleShowLimitedStrings } from '../Hooks/showLimitedString';
 
 const MainInputs = ({ route }) => {
 
@@ -30,13 +31,15 @@ const MainInputs = ({ route }) => {
         setGoingVal(goName);
     }
 
-    const handleShowLimitedStrings = (text) => {
-        if (text.length > 28) {
-            return text.substring(0, 28) + '...';
-        } else {
-            return text;
-        }
-    };
+    const handleSetPickupVal = async () => {
+        setPickVal('')
+        await AsyncStorage.setItem('pickValuesName', pickVal)
+    }
+
+    const handleSetGoingVal = async () => {
+        setGoingVal('')
+        await AsyncStorage.setItem('goingValuesName', goingVal)
+    }
 
     return (
         <View>
@@ -47,16 +50,16 @@ const MainInputs = ({ route }) => {
                         {/* Pickup Search Bar */}
                         <Pressable onPress={() => navigation.navigate('searchpage', { item: 'fromPickup', })}
                             style={{
-                                flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#EFEFEF',
+                                flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: 'white',
                                 paddingHorizontal: 12, paddingVertical: 18, borderRadius: SIZE.borderRadius,
-                                justifyContent: 'space-between', borderBottomColor: COLORS.btn__color, borderBottomWidth: 1
+                                justifyContent: 'space-between', borderWidth: 1, borderColor: COLORS.tab__color
                             }}>
                             <View style={{ flexDirection: 'row', gap: 10 }}>
                                 <Ionicons name="search-outline" size={24} color={COLORS.searchIcon__color} />
                                 {
                                     pickVal ?
                                         <Text style={{ fontSize: 18, fontWeight: '500' }}>
-                                            {handleShowLimitedStrings(JSON.parse(pickVal).searchPickupQuery)}
+                                            {handleShowLimitedStrings(JSON.parse(pickVal).searchPickupQuery, 28, 28)}
                                         </Text>
                                         :
                                         <Text style={{ fontSize: 18 }}>
@@ -64,7 +67,7 @@ const MainInputs = ({ route }) => {
                                         </Text>
                                 }
                             </View>
-                            <Pressable style={{ position: 'absolute', marginLeft: 310 }} onPress={() => setPickVal('')}>
+                            <Pressable style={{ position: 'absolute', marginLeft: 310, backgroundColor: 'white', paddingHorizontal: 4, paddingVertical: 4, borderRadius: 10}} onPress={handleSetPickupVal}>
                                 <Entypo name="cross" size={24} color="orangered" />
                             </Pressable>
                         </Pressable >
@@ -73,16 +76,16 @@ const MainInputs = ({ route }) => {
                         <Pressable
                             onPress={() => navigation.navigate('searchpage', { item: 'fromGoing', })}
                             style={{
-                                flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: '#EFEFEF',
+                                flexDirection: 'row', alignItems: 'center', gap: 10, backgroundColor: 'white',
                                 paddingHorizontal: 12, paddingVertical: 18, borderRadius: SIZE.borderRadius,
-                                justifyContent: 'space-between', borderBottomColor: COLORS.btn__color, borderBottomWidth: 1
+                                justifyContent: 'space-between', borderWidth: 1, borderColor: COLORS.tab__color
                             }}>
                             <View style={{ flexDirection: 'row', gap: 10 }}>
                                 <Ionicons name="search-outline" size={24} color={COLORS.searchIcon__color} />
                                 {
                                     goingVal ?
                                         <Text style={{ fontSize: 18, fontWeight: '500' }}>
-                                            {handleShowLimitedStrings(JSON.parse(goingVal).searchPickupQuery)}
+                                            {handleShowLimitedStrings(JSON.parse(goingVal).searchPickupQuery, 28, 28)}
                                         </Text>
                                         :
                                         <Text style={{ fontSize: 18 }}>
@@ -90,7 +93,7 @@ const MainInputs = ({ route }) => {
                                         </Text>
                                 }
                             </View>
-                            <Pressable style={{ position: 'absolute', marginLeft: 310 }} onPress={() => setGoingVal('')}>
+                            <Pressable style={{ position: 'absolute', marginLeft: 310, backgroundColor: 'white', paddingHorizontal: 4, paddingVertical: 4, borderRadius: 10}} onPress={handleSetGoingVal}>
                                 <Entypo name="cross" size={24} color="orangered" />
                             </Pressable>
                         </Pressable>

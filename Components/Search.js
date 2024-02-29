@@ -30,7 +30,7 @@ const Search = ({ route }) => {
                 await AsyncStorage.setItem(storageKey, JSON.stringify({ dropLat: lat, dropLong: lng }));
             }
             await AsyncStorage.setItem(nameKey, JSON.stringify({ searchPickupQuery }));
-            navigation.navigate('Main');
+            navigation.goBack();
         } catch (error) {
             console.error('Error storing data:', error);
         }

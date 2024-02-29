@@ -33,6 +33,7 @@ const DatePicker = () => {
         // if (selectedDateObject < currentDate || selectedDateObject > new Date(currentDate.setDate(currentDate.getDate() + 30))) {
         //     showSnackbar('Please Select Correct Date', 'red');
         // } else {
+
         const formattedDate = selectedDateObject.toISOString().split('T')[0];
         setSelectedDate(formattedDate);
 
@@ -51,7 +52,7 @@ const DatePicker = () => {
                         <Text style={{ fontSize: 16 }}>Select Date</Text>
                     </View>
                     <View>
-                        <Pressable style={{ backgroundColor: COLORS.small__btn, width: 150, borderWidth: 0, borderRadius: SIZE.borderRadius, borderBottomWidth: 0, borderBottomColor: COLORS.btn__color }} mode="contained" onPress={showDatePicker}>
+                        <Pressable style={{ backgroundColor: COLORS.bg__color, width: 150, borderWidth: 0, borderRadius: SIZE.borderRadius, borderBottomWidth: 0, borderBottomColor: COLORS.btn__color }} mode="contained" onPress={showDatePicker}>
                             <Text style={{ paddingVertical: 16, textAlign: 'center', fontWeight: '700' }}>
                                 {selectedDate ? formatDate(selectedDate) : 'Select'}
                             </Text>
