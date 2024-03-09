@@ -33,12 +33,12 @@ const MainInputs = ({ route }) => {
 
     const handleSetPickupVal = async () => {
         setPickVal('')
-        await AsyncStorage.setItem('pickValuesName', pickVal)
+        await AsyncStorage?.setItem('pickValuesName', '')
     }
 
     const handleSetGoingVal = async () => {
         setGoingVal('')
-        await AsyncStorage.setItem('goingValuesName', goingVal)
+        await AsyncStorage?.setItem('goingValuesName', '')
     }
 
     return (
@@ -55,7 +55,7 @@ const MainInputs = ({ route }) => {
                                 justifyContent: 'space-between', borderWidth: 1, borderColor: COLORS.tab__color
                             }}>
                             <View style={{ flexDirection: 'row', gap: 10 }}>
-                                <Ionicons name="search-outline" size={24} color={COLORS.searchIcon__color} />
+                                <Ionicons name="search-outline" size={24} color={COLORS.tab__color} />
                                 {
                                     pickVal ?
                                         <Text style={{ fontSize: 18, fontWeight: '500' }}>
@@ -67,7 +67,7 @@ const MainInputs = ({ route }) => {
                                         </Text>
                                 }
                             </View>
-                            <Pressable style={{ position: 'absolute', marginLeft: 310, backgroundColor: 'white', paddingHorizontal: 4, paddingVertical: 4, borderRadius: 10}} onPress={handleSetPickupVal}>
+                            <Pressable style={{ position: 'absolute', marginLeft: 310, backgroundColor: 'white', paddingHorizontal: 4, paddingVertical: 4, borderRadius: 10 }} onPress={handleSetPickupVal}>
                                 <Entypo name="cross" size={24} color="orangered" />
                             </Pressable>
                         </Pressable >
@@ -81,7 +81,7 @@ const MainInputs = ({ route }) => {
                                 justifyContent: 'space-between', borderWidth: 1, borderColor: COLORS.tab__color
                             }}>
                             <View style={{ flexDirection: 'row', gap: 10 }}>
-                                <Ionicons name="search-outline" size={24} color={COLORS.searchIcon__color} />
+                                <Ionicons name="search-outline" size={24} color={COLORS.tab__color} />
                                 {
                                     goingVal ?
                                         <Text style={{ fontSize: 18, fontWeight: '500' }}>
@@ -93,7 +93,7 @@ const MainInputs = ({ route }) => {
                                         </Text>
                                 }
                             </View>
-                            <Pressable style={{ position: 'absolute', marginLeft: 310, backgroundColor: 'white', paddingHorizontal: 4, paddingVertical: 4, borderRadius: 10}} onPress={handleSetGoingVal}>
+                            <Pressable style={{ position: 'absolute', marginLeft: 310, backgroundColor: 'white', paddingHorizontal: 4, paddingVertical: 4, borderRadius: 10 }} onPress={handleSetGoingVal}>
                                 <Entypo name="cross" size={24} color="orangered" />
                             </Pressable>
                         </Pressable>

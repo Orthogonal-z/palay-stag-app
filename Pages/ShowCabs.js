@@ -9,6 +9,7 @@ import MainInputs from '../Components/MainInputs';
 import { Button } from 'react-native-paper';
 import { SIZE } from '../Constants/Size';
 import CabsList from '../Components/CabsList';
+import { dataToMap } from '../Constants/List';
 
 
 export default function ShowCabs() {
@@ -34,57 +35,6 @@ export default function ShowCabs() {
 
         fetchSelectedDate();
     }, []);
-
-    const dataToMap = [
-        {
-            driverImg: 'https://images.unsplash.com/photo-1626565244872-206f4c1f9e57?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            driverName: 'Umesh Mali',
-            driverRatings: '4.2',
-            driverCar: 'Swift Dzire',
-            pickupFrom: 'Jhilmil, Nangloi, India',
-            drop: 'Hardiwar, Nangloi, India',
-            pickupTime: '01:30 PM',
-            dropTime: '06:30 PM',
-            vehicleNumber: 'DL MUUBETE',
-            price: '₹ 500',
-        },
-        {
-            driverImg: 'https://images.unsplash.com/photo-1626565244872-206f4c1f9e57?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            driverName: 'Praveen Mali',
-            driverRatings: '4.2',
-            driverCar: 'Swift Dzire',
-            pickupFrom: 'Jhilmil, Nangloi, India',
-            drop: 'Hardiwar, Nangloi, India',
-            pickupTime: '01:30 PM',
-            dropTime: '06:30 PM',
-            vehicleNumber: 'DL MUUBETE',
-            price: '₹ 500',
-        },
-        {
-            driverImg: 'https://images.unsplash.com/photo-1626565244872-206f4c1f9e57?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            driverName: 'Prashant Mali',
-            driverRatings: '4.2',
-            driverCar: 'Swift Dzire',
-            pickupFrom: 'Jhilmil, Nangloi, India',
-            drop: 'Hardiwar, Nangloi, India',
-            pickupTime: '01:30 PM',
-            dropTime: '06:30 PM',
-            vehicleNumber: 'DL MUUBETE',
-            price: '₹ 500',
-        },
-        {
-            driverImg: 'https://images.unsplash.com/photo-1626565244872-206f4c1f9e57?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            driverName: 'Rahul Mali',
-            driverRatings: '4.2',
-            driverCar: 'Swift Dzire',
-            pickupFrom: 'Jhilmil, Nangloi, India',
-            drop: 'Hardiwar, Nangloi, India',
-            pickupTime: '01:30 PM',
-            dropTime: '06:30 PM',
-            vehicleNumber: 'DL MUUBETE',
-            price: '₹ 500',
-        }
-    ]
 
     return (
         <SafeAreaProvider style={{ paddingTop: 50, paddingBottom: insets.bottom, backgroundColor: 'white' }}>
@@ -122,8 +72,8 @@ export default function ShowCabs() {
                     {
                         dataToMap && dataToMap?.map((items, index) => {
                             return (
-                                <View style={{ paddingHorizontal: 18, flexDirection: 'column',  marginBottom: 12 }} key={index}>
-                                    <CabsList data={items} style={{  marginBottom: 12}} />
+                                <View style={{ paddingHorizontal: 18, flexDirection: 'column', marginBottom: 12 }} key={index}>
+                                    <CabsList data={items} style={{ marginBottom: 12 }} />
                                 </View>
                             )
                         })

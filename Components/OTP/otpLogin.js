@@ -16,7 +16,6 @@ const PhoneOtpForm = ({ route }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState('');
 
-
     const { showSnackbar, SnackbarComponent } = useSnackbar();
 
     useEffect(() => {
@@ -92,7 +91,6 @@ const PhoneOtpForm = ({ route }) => {
             <View style={{ padding: 10, marginTop: 5, alignSelf: 'center' }}>
                 <Text onPress={() => navigation.navigate('login')} style={{ fontWeight: '600', color: 'green' }}>Change Number</Text>
             </View>
-
 
         </SafeAreaProvider>
     );
