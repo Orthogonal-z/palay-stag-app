@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ShowCabs from "../Pages/ShowCabs";
+import CabInformation from "../Pages/CabInformation";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -120,7 +121,9 @@ const StackNavigator = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={isAuthenticated ? "cabs" : "login"}>
+      <Stack.Navigator
+        initialRouteName={isAuthenticated ? "cab-info" : "login"}
+      >
         <Stack.Screen
           name="Main"
           component={BottomTabs}
@@ -149,6 +152,13 @@ const StackNavigator = () => {
         <Stack.Screen
           name="cabs"
           component={ShowCabs}
+          options={{ headerShown: false, animation: "none" }}
+        />
+
+        {/* Heavy Component - As it contains Maps and API Calls and BottomSheet Data */}
+        <Stack.Screen
+          name="cab-info"
+          component={CabInformation}
           options={{ headerShown: false, animation: "none" }}
         />
       </Stack.Navigator>
