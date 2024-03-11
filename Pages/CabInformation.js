@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
@@ -7,11 +7,12 @@ import { useNavigation } from "@react-navigation/native";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import { COLORS } from "../Constants/COLORS";
 import BottomSheetContent from "../Components/BottomSheetContent";
+import MapViewDirections from "react-native-maps-directions";
 
 
 const CabInformation = () => {
 
-  const snaps = ["50%", "50%"];
+  const snaps = ["55%", "55%"];
   const navigation = useNavigation();
   const [indexBS, setIndexBS] = useState();
   useEffect(() => {
@@ -37,6 +38,9 @@ const CabInformation = () => {
         <View style={{ flex: 1 }}>
           <MapView
             style={{ flex: 1 }}
+            showsUserLocation={true}
+            showsMyLocationButton={true}
+            showsBuildings={true}
             initialRegion={{
               latitude: (pickup.latitude + drop.latitude) / 2,
               longitude: (pickup.longitude + drop.longitude) / 2,
@@ -52,7 +56,7 @@ const CabInformation = () => {
               }}
               title="Drop"
               description="Rishikesh"
-              callout 
+              callout
             />
 
             {/* Pickup Marker */}
@@ -63,17 +67,24 @@ const CabInformation = () => {
               }}
               title="Pickup"
               description="Kashmiri Gate"
-              callout 
-            />
+              callout
+
+            >
+              <Image source={require('../assets/marker.png')}
+                style={{
+                  height: 40,
+                  width: 40,
+                  resizeMode: "contain",
+                }} />
+            </Marker>
 
             {/* Polyline */}
-            <Polyline
-              coordinates={[
-                { latitude: pickup.latitude, longitude: pickup.longitude },
-                { latitude: drop.latitude, longitude: drop.longitude },
-              ]}
+            <MapViewDirections
+              origin={pickup}
+              destination={drop}
+              apikey={process.env.EXPO_PUBLIC_GOOGLE_KEY}
+              strokeWidth={3}
               strokeColor="orangered"
-              strokeWidth={6}
             />
           </MapView>
         </View>
