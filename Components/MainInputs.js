@@ -60,7 +60,7 @@ const MainInputs = ({ route }) => {
                 gap: 10,
                 backgroundColor: "white",
                 paddingHorizontal: 12,
-                paddingVertical: 18,
+                paddingVertical: 10,
                 borderRadius: SIZE.borderRadius,
                 justifyContent: "space-between",
                 borderWidth: 1,
@@ -96,7 +96,7 @@ const MainInputs = ({ route }) => {
                 }}
                 onPress={handleSetPickupVal}
               >
-                <Entypo name="cross" size={24} color="orangered" />
+                <Entypo name="cross" size={24} color="#0B192C" />
               </TouchableOpacity>
             </Pressable>
 
@@ -111,7 +111,7 @@ const MainInputs = ({ route }) => {
                 gap: 10,
                 backgroundColor: "white",
                 paddingHorizontal: 12,
-                paddingVertical: 18,
+                paddingVertical: 10,
                 borderRadius: SIZE.borderRadius,
                 justifyContent: "space-between",
                 borderWidth: 1,
@@ -147,7 +147,7 @@ const MainInputs = ({ route }) => {
                 }}
                 onPress={handleSetGoingVal}
               >
-                <Entypo name="cross" size={24} color="orangered" />
+                <Entypo name="cross" size={24} color="#0B192C" />
               </TouchableOpacity>
             </Pressable>
           </View>

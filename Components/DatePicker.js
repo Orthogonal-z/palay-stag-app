@@ -86,7 +86,7 @@ const DatePicker = ({ showText }) => {
             >
               <Text
                 style={{
-                  paddingVertical: 16,
+                  paddingVertical: 10,
                   textAlign: "center",
                   fontWeight: "700",
                 }}

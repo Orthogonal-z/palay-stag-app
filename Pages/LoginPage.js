@@ -109,8 +109,8 @@ const LoginPage = () => {
                 paddingVertical: 12,
                 backgroundColor: "#EFEFEF",
                 paddingHorizontal: 12,
-                paddingVertical: 20,
-                fontSize: 18,
+                paddingVertical: 12,
+                fontSize: 14,
                 fontWeight: "400",
               }}
               onChangeText={handleAllChange(setUserPhoneNumber)}
@@ -118,17 +118,17 @@ const LoginPage = () => {
           </View>
         </KeyboardAvoidingView>
 
-        <KeyboardAvoidingView style={{ marginTop: 20 }}>
+        <KeyboardAvoidingView style={{ marginTop: 10 }}>
           <Button
             disabled={userPhoneNumber.length >= 10 ? false : true}
             onPress={() => handleNavigatingToOtpPage()}
             loading={isLoading}
             style={{
               borderRadius: SIZE.borderRadius,
-              paddingVertical: 12,
+              paddingVertical: 4,
               backgroundColor: COLORS.btn__color,
             }}
-            rippleColor={"orangered"}
+            rippleColor={"#0B192C"}
             textColor="white"
             mode="contained"
           >

@@ -71,20 +71,20 @@ const PhoneOtpForm = ({ route }) => {
             <View style={{ marginTop: 18, zIndex: 999 }}>
                 <SnackbarComponent />
             </View>
-            <View style={{ paddingLeft: 18, paddingRight: 18, marginTop: 18 }}>
+            <View style={{ paddingLeft: 10, paddingRight: 10, marginTop: 18 }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Ionicons onPress={() => navigation.goBack()} name="arrow-back" size={24} color="black" />
                 </TouchableOpacity>
             </View>
 
-            <View style={{ backgroundColor: 'white', paddingLeft: 18, paddingRight: 18, marginTop: 34, marginBottom: 20 }}>
+            <View style={{ backgroundColor: 'white', paddingLeft: 10, paddingRight: 10, marginTop: 34, marginBottom: 20 }}>
                 <Text style={{ fontWeight: 500, fontSize: SIZE.text__size }}>Enter 4 Digit OTP sent to {phoneNumber}</Text>
                 <OtpInput length={4} onOtpSubmit={onOtpSubmit} />
             </View>
 
             <View>
                 <View style={{ padding: 10 }}>
-                    <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={() => setIsLoading(!isLoading)}>Verify OTP</Button>
+                    <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'#0B192C'} textColor='white' mode="contained" onPress={() => setIsLoading(!isLoading)}>Verify OTP</Button>
                 </View>
             </View>
 

@@ -70,10 +70,10 @@ const HomePage = ({ route }) => {
       HomePageAPI.fetchAllVehicles(dataToSend).then((response) => {
         try {
           if (response.status) {
-            console.log("COOOOOOOL");
+            // console.log("COOOOOOOL");
             console.log(response);
           } else {
-            console.log("NOT COOOOOOOL");
+            // console.log("NOT COOOOOOOL");
             console.log(response);
             setIsLoading(false);
           }
@@ -96,6 +96,7 @@ const HomePage = ({ route }) => {
           backgroundColor: "white",
         }}
       >
+        
         <View
           style={{
             backgroundColor: "white",
@@ -117,7 +118,7 @@ const HomePage = ({ route }) => {
                 marginBottom: 20,
               }}
             >
-              PALAY
+              Cabbly
             </Text>
           </View>
 
@@ -134,10 +135,10 @@ const HomePage = ({ route }) => {
               loading={isLoading}
               style={{
                 borderRadius: SIZE.borderRadius,
-                paddingVertical: 12,
+                paddingVertical: 4,
                 backgroundColor: COLORS.btn__color,
               }}
-              rippleColor={"orangered"}
+              rippleColor={"#0B192C"}
               textColor="white"
               mode="contained"
             >

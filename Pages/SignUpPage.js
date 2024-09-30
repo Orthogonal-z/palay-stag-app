@@ -179,7 +179,7 @@ const SignUpPage = () => {
                     </View>
 
                     <View style={{ marginTop: 20 }}>
-                        <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'orangered'} textColor='white' mode="contained" onPress={() => handleUserSignUp()}>Send OTP</Button>
+                        <Button loading={isLoading} style={{ borderRadius: SIZE.borderRadius, paddingVertical: 12, backgroundColor: COLORS.btn__color }} rippleColor={'#0B192C'} textColor='white' mode="contained" onPress={() => handleUserSignUp()}>Send OTP</Button>
                     </View>
 
                     <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 14 }}>

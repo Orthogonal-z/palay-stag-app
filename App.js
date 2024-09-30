@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <PaperProvider>
-      <StatusBar backgroundColor='orangered' />
+      <StatusBar backgroundColor='#0B192C' />
       {
         isLoading ? <Splash /> : <StackNavigator />
       }

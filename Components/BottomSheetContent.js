@@ -27,7 +27,7 @@ const BottomSheetContent = () => {
             borderRadius: 8,
           }}
         >
-          <Text style={{ color: "orangered", textAlign: "center", fontWeight: '600' }}>Go Back</Text>
+          <Text style={{ color: "#0B192C", textAlign: "center", fontWeight: '600' }}>Go Back</Text>
         </TouchableOpacity>
       </View>
     </View>

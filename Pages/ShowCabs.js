@@ -71,7 +71,7 @@ export default function ShowCabs() {
             />
           </TouchableOpacity>
           <Text style={{ fontWeight: "700", fontSize: 16 }}>
-            Palay Cabs List
+            Cabbly Cabs List
           </Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
@@ -100,7 +100,7 @@ export default function ShowCabs() {
                 paddingVertical: 12,
                 backgroundColor: COLORS.btn__color,
               }}
-              rippleColor={"orangered"}
+              rippleColor={"#0B192C"}
               textColor="white"
               mode="contained"
             >

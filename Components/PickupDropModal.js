@@ -40,7 +40,7 @@ const PickupDropModal = ({ visible, hideModal }) => {
 
                     <Button style={{
                         borderRadius: SIZE.borderRadius, paddingVertical: 10, backgroundColor: COLORS.btn__color
-                    }} rippleColor={'orangered'} textColor='white' mode="contained">Search</Button>
+                    }} rippleColor={'#0B192C'} textColor='white' mode="contained">Search</Button>
                 </View>
             </Modal>
         </Portal>

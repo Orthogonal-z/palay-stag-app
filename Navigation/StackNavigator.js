@@ -59,7 +59,7 @@ const StackNavigator = () => {
                             <Entypo
                                 name="home"
                                 size={24}
-                                color={focused ? "orangered" : "black"}
+                                color={focused ? "#0B192C" : "black"}
                             />
                         ),
                     }}
@@ -76,7 +76,7 @@ const StackNavigator = () => {
                             <FontAwesome6
                                 name="ticket-simple"
                                 size={24}
-                                color={focused ? "orangered" : "black"}
+                                color={focused ? "#0B192C" : "black"}
                             />
                         ),
                     }}
@@ -93,7 +93,7 @@ const StackNavigator = () => {
                             <FontAwesome5
                                 name="hands-helping"
                                 size={24}
-                                color={focused ? "orangered" : "black"}
+                                color={focused ? "#0B192C" : "black"}
                             />
                         ),
                     }}
@@ -110,7 +110,7 @@ const StackNavigator = () => {
                             <FontAwesome
                                 name="user"
                                 size={24}
-                                color={focused ? "orangered" : "black"}
+                                color={focused ? "#0B192C" : "black"}
                             />
                         ),
                     }}
@@ -122,7 +122,8 @@ const StackNavigator = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName={isAuthenticated ? "cab-info" : "login"}
+                // initialRouteName={isAuthenticated ? "cab-info" : "login"}
+                initialRouteName={"home"}
             >
                 <Stack.Screen
                     name="Main"

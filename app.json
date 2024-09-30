@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "palay-stag",
-    "slug": "palay-stag",
+    "name": "Cabbly-stag",
+    "slug": "Cabbly-stag",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -30,7 +30,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow Palay to use your location."
+          "locationAlwaysAndWhenInUsePermission": "Allow Cabbly to use your location."
         }
       ]
       

@@ -84,7 +84,7 @@ const CabInformation = () => {
               destination={drop}
               apikey={process.env.EXPO_PUBLIC_GOOGLE_KEY}
               strokeWidth={3}
-              strokeColor="orangered"
+              strokeColor="#0B192C"
             />
           </MapView>
         </View>
